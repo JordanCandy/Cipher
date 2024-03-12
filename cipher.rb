@@ -1,17 +1,27 @@
-puts "Put in string"
-special_string = gets.chomp
-puts "Put in a value"
-value = gets.to_i
+def cipher(string, value)
+  result = string.chars.map do |letter|
+    if letter =~ /[A-Za-z]/
+      numbers = letter.ord
+      adjusted_numbers = numbers - value
 
-special_string.each_char do |char|
-  original = char.ord
-  if (original >= 65 && original <= 90) || (original >= 97 && original <= 122)
-    fix = original + 1
-    modified = (fix + value - 65) % 26 + 65  # Wrap around for uppercase letters
-    print modified.chr
-  else
-    fix = original - 1
-    modified = (fix + value - 97) % 26 + 97  # Wrap around for lowercase letters
-    print modified.chr
+      if letter =~ /[A-Z]/
+        adjusted_numbers = ((adjusted_numbers - 'A'.ord) % 26 + 'A'.ord)
+      elsif letter =~ /[a-z]/
+        adjusted_numbers = ((adjusted_numbers - 'a'.ord) % 26 + 'a'.ord)
+      end
+
+      adjusted_numbers.chr
+    else
+      letter  # Keep non-alphabetic characters unchanged
+    end
   end
+
+  puts result.join
 end
+
+puts "Input string"
+string_getter = gets.chomp
+puts "Input value"
+value_getter = gets.to_i
+
+cipher(string_getter, value_getter)
