@@ -1,5 +1,4 @@
 dictionary  = ["below", "down", "go", "going", "horn", "how", "howdy", "it", "i", "low", "own", "part", "partner", "sit"]
-
 puts "Input:"
 input = gets.chomp.downcase
 
